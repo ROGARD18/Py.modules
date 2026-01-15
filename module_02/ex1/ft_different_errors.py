@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    ft_different_errors.py                             :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rogard-antoine <rogard-antoine@student.    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/01/14 00:21:45 by rogard-anto       #+#    #+#              #
-#    Updated: 2026/01/14 00:40:44 by rogard-anto      ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 def garden_operations() -> None:
     try:
         int_one = int("abc")
@@ -29,10 +17,14 @@ def garden_operations() -> None:
         print(dictionnaire['ville'])
     except KeyError:
         print("'Ville' is not in the dictionnary")
-
+    try:
+        int_one = int("20")
+        print("Good Value")
+    except (ValueError, KeyError):
+        print("Invalid number or not in dictionnary")
+        
 
 def test_error_types() -> None:
-    # Shows how to catch multiple error types with one except block not done !!!!!
     garden_operations()
     print("The program continues running after each error")
 
