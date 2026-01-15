@@ -6,4 +6,4 @@ def ft_water_reminder() -> None:
         print("Plants are fine")
 
 
-ft_water_reminder()
+# ft_water_reminder()

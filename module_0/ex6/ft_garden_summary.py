@@ -6,4 +6,4 @@ def ft_garden_summary() -> None:
     print("Status: Growing well!")
 
 
-ft_garden_summary()
+# ft_garden_summary()

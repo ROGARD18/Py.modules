@@ -4,4 +4,4 @@ def ft_plot_area() -> None:
     print("Plot area :", int(a) * int(b))
 
 
-ft_plot_area()
+# ft_plot_area()
