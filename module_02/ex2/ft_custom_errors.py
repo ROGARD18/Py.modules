@@ -1,6 +1,7 @@
 class GardenError(Exception):
     pass
 
+
 class PlantError(GardenError):
     pass
 
@@ -22,22 +23,23 @@ def plant_age(age: int) -> None:
 
 
 def plant_watter(liters: int) -> None:
-    if (liters > 2):
+    if liters > 2:
         raise WaterError(f"{liters} is too much ! The plant will die.")
     print(f"{liters} it's good for this plant")
-    
+
 
 def test_error() -> None:
     try:
         garden_area(30)
-        plant_watter(11) # un fail et ca s'arrete
+        plant_watter(11)  # un fail et ca s'arrete
         plant_age(11)
     except GardenError as e:
         print(f"stop : {e}")
+
 
 def main() -> None:
     test_error()
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()

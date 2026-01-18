@@ -10,6 +10,7 @@ def check_plant_health(plant_name, water_level, sunlight_hours) -> None:
     except Exception as e:
         print(f"{e}")
 
+
 def test_plant_checks() -> None:
     check_plant_health("rose", 5, 5)
     check_plant_health("", -1, -1)
@@ -21,5 +22,5 @@ def main() -> None:
     test_plant_checks()
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
