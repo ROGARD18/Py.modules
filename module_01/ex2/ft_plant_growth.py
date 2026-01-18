@@ -1,40 +1,50 @@
 class Plant:
-    def __init__(self, name: str, height: int, age: int):
+    """New class represents a plant"""
+
+    def __init__(self, name: str, height: int, age: int) -> None:
+        """Initialize the plant with name, height and age"""
         self.name = name
         self.height = height
         self.age = age
 
-    def growing(self, growth: int) -> None:
+    def grow(self, growth: int) -> None:
+        """Increase plant's height by the growth value"""
         self.height += growth
 
-    def aging(self) -> None:
+    def ages(self) -> None:
+        """Increase plant's age by one day"""
         self.age += 1
 
-    def get_info(self) -> None:
-        print(f"{self.name}: {self.height}cm, {self.age} days old")
+    def get_info(self) -> str:
+        """Return a string with all plant's infos"""
+        return f"{self.name}: {self.height}cm, {self.age} days old"
 
-    def week_effect(self, growth: int) -> None:
-        for i in range(1, 8):
-            self.growing(growth)
-            self.aging()
+
+def week_effect(self, growth: int) -> None:
+    """function use to simulate a week on a plant"""
+    for i in range(1, 8):
+        self.grow(growth)
+        self.ages()
 
 
 def main() -> None:
-    Rose = Plant("Rose", 25, 30)
-    Sunflower = Plant("Sunflower", 80, 45)
-    Cactus = Plant("Cactus", 15, 120)
+    """Test creation of plants, dysplays infos, test to grow and ages
+    plants and simulate a week on plant"""
+    rose = Plant("Rose", 25, 30)
+    sunflower = Plant("Sunflower", 80, 45)
+    cactus = Plant("Cactus", 15, 120)
 
-    print("=== Day 1 ===")
-    Rose.get_info()
-    Rose.week_effect(2)
-    Sunflower.get_info()
-    Sunflower.week_effect(1)
-    Cactus.get_info()
-    Cactus.week_effect(3)
-    print("=== Day 7 ===")
-    Rose.get_info()
-    Sunflower.get_info()
-    Cactus.get_info()
+    print("=== Day 1 ===\n")
+    print(f"{rose.get_info()}")
+    print(f"{sunflower.get_info()}")
+    print(f"{cactus.get_info()}")
+    week_effect(rose, 2)
+    week_effect(sunflower, 1)
+    week_effect(cactus, 3)
+    print("\n=== Day 7 ===\n")
+    print(f"{rose.get_info()}")
+    print(f"{sunflower.get_info()}")
+    print(f"{cactus.get_info()}")
 
 
 if __name__ == "__main__":

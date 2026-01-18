@@ -1,14 +1,19 @@
 class Plant:
-    def __init__(self, name: str, height: int, age: int):
-        self.name = name
-        self.height = height
-        self.age = age
+    """New class represents a plant"""
 
-    def get_info(self) -> None:
-        print(f"{self.name}: {self.height}cm, {self.age} days old")
+    def __init__(self, name: str, height: int, age: int) -> None:
+        """Initialize the plant with name, height and age"""
+        self.name: str = name
+        self.height: int = height
+        self.age: int = age
+
+    def get_info(self) -> str:
+        """Return a string with all plant's infos"""
+        return f"{self.name}: {self.height}cm, {self.age} days old"
 
 
 def plant_factory() -> None:
+    """Plant's factory to create and add plant in the garden"""
     i = 0
     plant_list = [
         ["Rose", 25, 30],
@@ -17,7 +22,7 @@ def plant_factory() -> None:
         ["Tulip", 10, 5],
         ["Lavender", 20, 15]
     ]
-    print("=== Plant Factory Output ===")
+    print("=== Plant Factory Output ===\n")
     garden = []
     for info in plant_list:
         plant = Plant(info[0], info[1], info[2])
@@ -25,7 +30,7 @@ def plant_factory() -> None:
         i += 1
 
     for plant in garden:
-        print(f"Created: {plant.name} ({plant.height}cm, {plant.age} days)")
+        print(f"Created: {plant.get_info()}")
 
     print(f"Total plants created: {i}")
 

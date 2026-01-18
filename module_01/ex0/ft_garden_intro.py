@@ -1,7 +1,8 @@
 def print_garden_info() -> None:
-    name = "Rose"
-    height = "25cm"
-    age = "30 days"
+    """Declaration of plant's variables"""
+    name: str = "Rose"
+    height: str = "25cm"
+    age: str = "30 days"
 
     print("=== Welcome to My Garden ===")
     print(f"Plant: {name}")
