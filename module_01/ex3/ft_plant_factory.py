@@ -1,14 +1,28 @@
 class Plant:
-    """New class represents a plant"""
+    """
+    New class represents a plant with a name, a height and an age.
+    Class with 1 functions:
+    - function use to return all plant's data to display it after.
+    """
 
     def __init__(self, name: str, height: int, age: int) -> None:
-        """Initialize the plant with name, height and age"""
+        """
+        Init all plant's data with args:
+        Args:
+            name (str): Plant's name
+            height (int): Plant's height
+            age (int): Plant's age
+        """
+
         self.name: str = name
         self.height: int = height
         self.age: int = age
 
     def get_info(self) -> str:
-        """Return a string with all plant's infos"""
+        """
+        Return a string with all plant's data
+        """
+        
         return f"{self.name}: {self.height}cm, {self.age} days old"
 
 

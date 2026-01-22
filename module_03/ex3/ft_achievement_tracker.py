@@ -38,6 +38,7 @@ def achievement_tracker() -> None:
     print("")
     print(f"Common all player: {alice_set.intersection(bob_set, charlie_set)}")
     # print(f"Rare achievements ({player} players): {}")
+    # UTILISER UNION !!
     print("")
     print(f"Alice vs Bob common: {alice_set.intersection(bob_set)}")
     print(f"Alice unique: {alice_set.difference(bob_set)}")
