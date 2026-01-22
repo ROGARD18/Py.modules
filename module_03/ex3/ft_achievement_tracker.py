@@ -12,7 +12,7 @@ def achievement_tracker() -> None:
         "first_kill",
         "level_10",
         "boss_slayer",
-        "speed_demon"
+        "collector",
     }
     alice_set: set = {
         "first_kill",
@@ -32,12 +32,18 @@ def achievement_tracker() -> None:
 
     print("")
     print("=== Achievement Analytics ===")
-    print(total_achievement)
+    print(f"All unique achievements: {total_achievement})")
     print(f"Total unique achievements : {len(total_achievement)}")
 
     print("")
     print(f"Common all player: {alice_set.intersection(bob_set, charlie_set)}")
+    # print(f"Rare achievements ({player} players): {}")
+    print("")
+    print(f"Alice vs Bob common: {alice_set.intersection(bob_set)}")
+    print(f"Alice unique: {alice_set.difference(bob_set)}")
+    print(f"Bob unique: {bob_set.difference(alice_set)}")
 
 
 if __name__ == "__main__":
+    print("=== Achievement Tracker System ===\n")
     achievement_tracker()
