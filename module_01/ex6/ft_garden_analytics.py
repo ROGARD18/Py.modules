@@ -45,7 +45,7 @@ class GardenManager:
             count_regular: int = 0
             count_flower: int = 0
             count_prize: int = 0
-            count_tot: int = 0
+            count_tot: int = 00
             diff_height: int = 0
             for plant in plants_list:
                 diff_height += plant.new_height - plant.height_start
