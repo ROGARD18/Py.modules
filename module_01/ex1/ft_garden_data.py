@@ -1,24 +1,26 @@
 class Plant:
-    """
-    New class represents a plant with a name, a height and an age.
-    Class with a fonction who can print plant.
+    """Class represents a plant with a name, a height and an age.
+    Within a fonction:
+    - print_plant(): use to print plant's datas.
     """
 
-    def __init__(self, name: str, height: int, age: int):
+    def __init__(self, name: str, height: int, age: int) -> None:
         """
-        Init all plant's data with args:
+        Init all plant's data with args.
+
         Args:
             name (str): Plant's name
             height (int): Plant's height
             age (int): Plant's age
         """
+
         self.name: str = name
         self.height: int = height
         self.age: int = age
 
     def print_plant(self) -> None:
         """
-        fonction use to print plant's data.
+        Fonction use to print plant's data.
         """
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 

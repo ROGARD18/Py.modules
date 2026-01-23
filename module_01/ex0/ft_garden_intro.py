@@ -1,8 +1,5 @@
 def print_garden_info() -> None:
-    """
-    Print all graden data :
-    Plant of the garden and his data
-    """
+    """Print all graden data: Plant of the garden and his data."""
 
     name: str = "Rose"
     height: str = "25cm"

@@ -9,7 +9,8 @@ class Plant:
 
     def __init__(self, name: str, height: int, age: int) -> None:
         """
-        Init all plant's data with args:
+        Init all plant's data with args.
+
         Args:
             name (str): Plant's name
             height (int): Plant's height
@@ -22,27 +23,30 @@ class Plant:
 
     def grow(self, growth: int) -> None:
         """
-        Increase plant's height by the growth value
+        Increase plant's height by the growth value.
+
+        Args:
+            growth (int): value use to increase the starting height.
         """
         self.height += growth
 
     def ages(self) -> None:
         """
-        Increase plant's age by one day
+        Increase plant's age by one day.
         """
         self.age += 1
 
     def get_info(self) -> str:
         """
-        Return a string with all plant's data
+        Return a string with all plant's data.
         """
 
         return f"{self.name}: {self.height}cm, {self.age} days old"
 
     def week_effect(self, growth: int) -> None:
         """
-        function use to simulate a week on a plant to see effects of grow()
-        and ages()
+        Function use to simulate a week on a plant to see effects of grow()
+        and ages().
         """
 
         for i in range(1, 8):
@@ -52,8 +56,8 @@ class Plant:
 
 def main() -> None:
     """
-    Test creation of plants, dysplays data, test to grow and ages
-    plants and simulate a week on plant
+    Test creation of plants (Rose, Cactus and Sunflower), dysplays data, test
+    to grow and ages plants and simulate a week on plant.
     """
 
     rose = Plant("Rose", 25, 30)

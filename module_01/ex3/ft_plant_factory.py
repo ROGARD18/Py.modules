@@ -1,13 +1,14 @@
 class Plant:
     """
-    New class represents a plant with a name, a height and an age.
-    Class with 1 functions:
+    Class represents a plant with a name, a height and an age.
+    Within 1 function:
     - function use to return all plant's data to display it after.
     """
 
     def __init__(self, name: str, height: int, age: int) -> None:
         """
-        Init all plant's data with args:
+        Init all plant's data with args.
+
         Args:
             name (str): Plant's name
             height (int): Plant's height
@@ -20,34 +21,34 @@ class Plant:
 
     def get_info(self) -> str:
         """
-        Return a string with all plant's data
+        Return a string with all plant's data.
         """
-        
-        return f"{self.name}: {self.height}cm, {self.age} days old"
+
+        return f"{self.name} ({self.height}cm, {self.age} days)"
 
 
 def plant_factory() -> None:
-    """Plant's factory to create and add plant in the garden"""
+    """Plant's factory use to create and add plant in a garden."""
     i = 0
     plant_list = [
         ["Rose", 25, 30],
+        ["Oak", 200, 365],
+        ["Cactus", 5, 90],
         ["Sunflower", 80, 45],
-        ["Cactus", 15, 120],
-        ["Tulip", 10, 5],
-        ["Lavender", 20, 15]
+        ["Fern", 15, 120]
     ]
-    print("=== Plant Factory Output ===\n")
     garden = []
-    for info in plant_list:
-        plant = Plant(info[0], info[1], info[2])
+    for data in plant_list:
+        plant = Plant(data[0], data[1], data[2])
         garden.append(plant)
         i += 1
 
     for plant in garden:
-        print(f"Created: {plant.get_info()}")
+        print(f"Created: {plant.get_data()}")
 
-    print(f"Total plants created: {i}")
+    print(f"\nTotal plants created: {i}")
 
 
 if __name__ == "__main__":
+    print("=== Plant Factory Output ===")
     plant_factory()
