@@ -38,13 +38,13 @@ def plant_factory() -> None:
         ["Fern", 15, 120]
     ]
     garden = []
-    for data in plant_list:
-        plant = Plant(data[0], data[1], data[2])
+    for info in plant_list:
+        plant = Plant(info[0], info[1], info[2])
         garden.append(plant)
         i += 1
 
     for plant in garden:
-        print(f"Created: {plant.get_data()}")
+        print(f"Created: {plant.get_info()}")
 
     print(f"\nTotal plants created: {i}")
 

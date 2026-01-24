@@ -124,6 +124,7 @@ class GardenManager:
                 plants_list (list): all plants
             """
             GardenManager.GardenStats.get_plants_in_garden(plants_list)
+            print("")
             GardenManager.GardenStats.print_numbers_plant(plants_list)
 
     @staticmethod
@@ -196,7 +197,7 @@ def main() -> None:
     alice.add_plant(sunflower)
     print("")
     alice.grow_all_plants()
-    print("=== alice's garden Report ===")
+    print("=== Alice's garden Report ===")
     alice.GardenStats.all_stats(alice.plants_list)
     print("")
     GardenManager.print_score()
