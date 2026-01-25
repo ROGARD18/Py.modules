@@ -16,4 +16,5 @@ def take_args() -> None:
     print(f"Total arguments: {n}")
 
 
-take_args()
+if __name__ == "__main__":
+    take_args()

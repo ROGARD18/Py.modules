@@ -1,32 +1,67 @@
-def inventory_system() -> None:
-    inventory: dict = {
-        "potion": 5,
-        "armor": 3,
-        "shield": 2,
-        "sword": 1,
-        "helmet": 1
-    }
-    tot_item: int = sum(inventory.values())
-    size: int = len(inventory)
-    print(f"Total items in inventory: {tot_item}")
-    print(f"Unique item: {size}\n")
+import sys
 
-    print("=== Current Inventory ===")
-    for item in inventory:
-        pourcent: float = inventory.get(item) / tot_item
-        print(f"{item}: {inventory.get(item)} units ({pourcent:.1%})")
+
+def inventory_system() -> None:
+    """Analyze inventory data from command line and categorize items."""
+    print("=== Inventory System Analysis ===")
+    inventory: dict = {}
+
+    if len(sys.argv) <= 1:
+        print("No args given ! Usage: python3 ft_inventory_system.py item:unit")
+        return
+
+    for arg in sys.argv[1:]:
+        try:
+            name, unit = arg.split(":")
+            inventory[name] = int(unit)
+        except ValueError as e:
+            print(f"Error parsing '{arg}': {e}")
+            return
+
+    if not inventory:
+        return
+
+    total_items: int = sum(inventory.values())
+
+    print(f"Total items in inventory: {total_items}")
+    print(f"Unique item types: {len(inventory)}")
+
+    print("\n=== Current Inventory ===")
+    for item, unit in inventory.items():
+        unit = inventory.get(item)
+        percentage = (unit / total_items)
+        print(f"{item}: {unit} units ({percentage:.1%})")
 
     print("\n=== Inventory Statistics ===")
-    max_i: int = max(inventory, key=inventory.get)
-    min_i: int = min(inventory, key=inventory.get)
-    print(f"Most abundant: {max_i} ({max(inventory.values())} units)")
-    print(f"Least abundant: {min_i} ({min(inventory.values())} unit)")
+    most_abundant: str = max(inventory, key=inventory.get)
+    least_abundant: str = min(inventory, key=inventory.get)
+    print(f"Most abundant: {most_abundant} ({inventory.get(most_abundant)} units)")
+    print(f"Least abundant: {least_abundant} ({inventory.get(least_abundant)} units)")
 
+    categories: dict = {"Moderate": {}, "Scarce": {}}
+    for item, unit in inventory.items():
+        if unit >= 5:
+            categories["Moderate"][item] = unit
+        else:
+            categories["Scarce"][item] = unit
 
-def main() -> None:
-    print("=== Inventory System Analysis ===")
-    inventory_system()
+    print("\n=== Item Categories ===")
+    print(f"Moderate: {categories['Moderate']}")
+    print(f"Scarce: {categories['Scarce']}")
+
+    restock: list = []
+    for item, unit in inventory.items():
+        if unit <= 1:
+            restock.append(item)
+    print("\n=== Management Suggestions ===")
+    print(f"Restock needed: {restock}")
+
+    print("\n=== Dictionary Properties Demo ===")
+    print(f"Dictionary key: {list(inventory.keys())}")
+    print(f"Dictionary values: {list(inventory.values())}")
+    item_to_find: int = 'sword'
+    print(f"Sample lookup - '{item_to_find}' in inventory: {item_to_find in inventory}")
 
 
 if __name__ == "__main__":
-    main()
+    inventory_system()
