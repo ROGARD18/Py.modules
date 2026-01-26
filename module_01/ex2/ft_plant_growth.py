@@ -5,6 +5,7 @@ class Plant:
     - function who can grow the plant with increases the height,
     - function to ages the plant, same way as grow() with the age,
     - function use to return all plant's data to display it after.
+    - function use to simulate a week on a plant
     """
 
     def __init__(self, name: str, height: int, age: int) -> None:
@@ -36,12 +37,12 @@ class Plant:
         """
         self.age += 1
 
-    def get_info(self) -> str:
+    def get_info(self) -> dict:
         """
         Return a string with all plant's data.
         """
 
-        return f"{self.name}: {self.height}cm, {self.age} days old"
+        return self.__dict__
 
     def week_effect(self, growth: int) -> None:
         """
@@ -49,7 +50,7 @@ class Plant:
         and ages().
         """
 
-        for i in range(1, 8):
+        for i in range(7):
             self.grow(growth)
             self.ages()
 
@@ -75,11 +76,11 @@ def main() -> None:
     cactus.week_effect(cactus_growth)
     print("=== Day 7 ===")
     print(f"{rose.get_info()}")
-    print(f"Growth this week: +{rose_growth}cm")
+    print(f"Growth this week: +{rose_growth * 7}cm")
     print(f"{sunflower.get_info()}")
-    print(f"Growth this week: +{sunflower_growth}cm")
+    print(f"Growth this week: +{sunflower_growth * 7}cm")
     print(f"{cactus.get_info()}")
-    print(f"Growth this week: +{cactus_growth}cm")
+    print(f"Growth this week: +{cactus_growth * 7}cm")
 
 
 if __name__ == "__main__":

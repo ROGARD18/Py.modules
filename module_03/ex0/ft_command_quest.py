@@ -2,7 +2,7 @@ import sys
 
 
 def take_args() -> None:
-    n = len(sys.argv)
+    n: int = len(sys.argv)
     print("=== Command Quest ===")
     if n == 1:
         print("No arguments provided!")

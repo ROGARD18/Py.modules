@@ -19,12 +19,12 @@ class Plant:
         self.height: int = height
         self.age: int = age
 
-    def get_info(self) -> str:
+    def get_info(self) -> dict:
         """
         Return a string with all plant's data.
         """
 
-        return f"{self.name} ({self.height}cm, {self.age} days)"
+        return self.__dict__
 
 
 def plant_factory() -> None:
@@ -39,7 +39,7 @@ def plant_factory() -> None:
     ]
     garden = []
     for info in plant_list:
-        plant = Plant(info[0], info[1], info[2])
+        plant = Plant(*info)
         garden.append(plant)
         i += 1
 

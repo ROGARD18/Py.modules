@@ -2,13 +2,13 @@ def print_garden_info() -> None:
     """Print all graden data: Plant of the garden and his data."""
 
     name: str = "Rose"
-    height: str = "25cm"
-    age: str = "30 days"
+    height: int = 25
+    age: int = 30
 
     print("=== Welcome to My Garden ===")
     print(f"Plant: {name}")
-    print(f"Height: {height}")
-    print(f"Age: {age}\n")
+    print(f"Height: {height}cm")
+    print(f"Age: {age} days\n")
     print("=== End of Program ===")
 
 

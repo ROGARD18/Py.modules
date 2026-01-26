@@ -14,7 +14,7 @@ class Plant:
         self.height: int = height
         self.age: int = age
 
-    def get_info(self, class_n: str) -> str:
+    def return_info(self, class_n: str) -> str:
         """
         Use to return all plant's data
 
@@ -43,14 +43,14 @@ class Flower(Plant):
         else:
             return (f"{self.name} ({self.__class__.__name__}) is blooming.\n")
 
-    def get_info(self) -> str:
+    def return_info(self) -> str:
         """
         Use to return all plant flower data
 
         Returns:
             _type_: all infos of the flower
         """
-        return (super().get_info(self.__class__.__name__)
+        return (super().return_info(self.__class__.__name__)
                 + (f" {self.color}\n")
                 + f"{self.bloom()}\n")
 
@@ -76,14 +76,14 @@ class Tree(Plant):
         shade = self.trunk_diameter * 1.5
         return (f"{self.name} provides {shade} square meters of shade\n")
 
-    def get_info(self) -> str:
+    def return_info(self) -> str:
         """
         Use to return all plant tree data
 
         Returns:
             _type_: all infos of the tree
         """
-        return (super().get_info(self.__class__.__name__)
+        return (super().return_info(self.__class__.__name__)
                 + (f" {str(self.trunk_diameter)}cm diameter\n")
                 + f"{self.produce_shade()}\n")
 
@@ -121,14 +121,14 @@ class Vegetable(Plant):
         """
         return (f"{self.name} is rich in {self.nutritional_value}")
 
-    def get_info(self) -> str:
+    def return_info(self) -> str:
         """
         Use to return all plant vegetable data
 
         Returns:
             _type_: all infos of the vegetable
         """
-        return (super().get_info(self.__class__.__name__)
+        return (super().return_info(self.__class__.__name__)
                 + f" {self.harvest_season} harvest\n"
                 + f"{self.name} is rich in {self.nutritional_value}")
 
@@ -140,12 +140,12 @@ def main() -> None:
     tomato = Vegetable("Tomato", 80, 90, "summer", "vitamin C")
 
     print("=== Garden Plant Types ===\n")
-    print(f"{rose.get_info()}", end="")
+    print(f"{rose.return_info()}", end="")
     rose.bloom()
 
-    print(f"{oak.get_info()}", end="")
+    print(f"{oak.return_info()}", end="")
 
-    print(f"{tomato.get_info()}", end="")
+    print(f"{tomato.return_info()}", end="")
 
 
 if __name__ == "__main__":

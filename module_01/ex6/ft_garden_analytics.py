@@ -64,28 +64,28 @@ class GardenManager:
         GardenManager.garden_numbers += 1
         GardenManager.garden_names.append(name)
 
+    def get_plants_in_garden(self) -> None:
+        """
+        Use to print all plants and their datas.
+
+        Args:
+            plants_list (list[Plant]): all plants who will be printed
+        """
+        print("Plants in garden :")
+        for plant in self.plants_list:
+            if isinstance(plant, PrizeFlower):
+                print(f"- {plant.name} : {plant.new_height}cm, ", end="")
+                print(f"{plant.color} flowers, Prize points: {plant.prize}")
+            elif isinstance(plant, FloweringPlant):
+                print(f"- {plant.name}: {plant.new_height}cm", end="")
+                print(f", {plant.color} flowers (bloomig)")
+            else:
+                print(f"- {plant.name} : {plant.new_height}cm")
+        print("")
+
     class GardenStats:
         """Class use to stock all stats for a garden.
         All garden have his stats independently of others"""
-
-        @staticmethod
-        def get_plants_in_garden(plants_list: list[Plant]) -> None:
-            """
-            Use to print all plants and their datas.
-
-            Args:
-                plants_list (list[Plant]): all plants who will be printed
-            """
-            print("Plants in garden :")
-            for plant in plants_list:
-                if isinstance(plant, PrizeFlower):
-                    print(f"- {plant.name} : {plant.new_height}cm, ", end="")
-                    print(f"{plant.color}, Prize points: {plant.prize}")
-                elif isinstance(plant, FloweringPlant):
-                    print(f"- {plant.name}: {plant.new_height}cm", end="")
-                    print(f", {plant.color} flowers (bloomig)")
-                else:
-                    print(f"- {plant.name} : {plant.new_height}cm")
 
         @staticmethod
         def print_numbers_plant(plants_list: list) -> None:
@@ -112,20 +112,6 @@ class GardenManager:
             print(f"Plants added: {count_tot}, Total growth: {diff_height}cm")
             print(f"Plant types: {count_regular} regular", end="")
             print(f" {count_flower} flower, {count_prize} prize")
-
-        @staticmethod
-        def all_stats(plants_list: list) -> None:
-            """
-            function use to call two function in one:
-            - get_plants_in_garden()
-            - print_numbers_plant()
-
-            Args:
-                plants_list (list): all plants
-            """
-            GardenManager.GardenStats.get_plants_in_garden(plants_list)
-            print("")
-            GardenManager.GardenStats.print_numbers_plant(plants_list)
 
     @staticmethod
     def check_height(height: int) -> bool:
@@ -198,7 +184,8 @@ def main() -> None:
     print("")
     alice.grow_all_plants()
     print("=== Alice's garden Report ===")
-    alice.GardenStats.all_stats(alice.plants_list)
+    alice.get_plants_in_garden()
+    alice.GardenStats.print_numbers_plant(alice.plants_list)
     print("")
     GardenManager.print_score()
     print("Total gardens managed:", end="")

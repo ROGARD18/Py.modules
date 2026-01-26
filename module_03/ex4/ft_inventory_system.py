@@ -7,7 +7,7 @@ def inventory_system() -> None:
     inventory: dict = {}
 
     if len(sys.argv) <= 1:
-        print("No args given ! Usage: python3 ft_inventory_system.py item:unit")
+        print("No args given ! Usage: python3 ft_inventory_system.py item: unit")
         return
 
     for arg in sys.argv[1:]:
@@ -59,7 +59,7 @@ def inventory_system() -> None:
     print("\n=== Dictionary Properties Demo ===")
     print(f"Dictionary key: {list(inventory.keys())}")
     print(f"Dictionary values: {list(inventory.values())}")
-    item_to_find: int = 'sword'
+    item_to_find: str = 'sword'
     print(f"Sample lookup - '{item_to_find}' in inventory: {item_to_find in inventory}")
 
 
