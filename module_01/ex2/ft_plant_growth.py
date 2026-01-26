@@ -20,6 +20,7 @@ class Plant:
 
         self.name = name
         self.height = height
+        self.height_dy = height
         self.age = age
 
     def grow(self, growth: int) -> None:
@@ -29,7 +30,7 @@ class Plant:
         Args:
             growth (int): value use to increase the starting height.
         """
-        self.height += growth
+        self.height_dy += growth
 
     def ages(self) -> None:
         """
@@ -76,11 +77,11 @@ def main() -> None:
     cactus.week_effect(cactus_growth)
     print("=== Day 7 ===")
     print(f"{rose.get_info()}")
-    print(f"Growth this week: +{rose_growth * 7}cm")
+    print(f"Growth this week: +{rose.height_dy - rose.height}cm")
     print(f"{sunflower.get_info()}")
-    print(f"Growth this week: +{sunflower_growth * 7}cm")
+    print(f"Growth this week: +{sunflower.height_dy - sunflower.height}cm")
     print(f"{cactus.get_info()}")
-    print(f"Growth this week: +{cactus_growth * 7}cm")
+    print(f"Growth this week: +{cactus.height_dy - cactus.height}cm")
 
 
 if __name__ == "__main__":

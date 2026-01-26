@@ -1,37 +1,41 @@
 def garden_operations() -> None:
+    """Demonstration of multipes Error:
+    - ValueError
+    - ZeroDivisionError
+    - FileNotFoundError
+    - KeyError
+    - multiple Error in one
+    """
+    print("\nTesting ValueError...")
     try:
-        int_try = int("abc")
-        print("Good Value")
-    except ValueError:
-        print("Is not a valid number")
+        value = int("abc")
+        print(value)
+    except ValueError as e:
+        print(f"Caught ValueError: {e}")
+    print("\nTesting ZeroDivisionErro...")
     try:
-        int_try = 8 / 0
-    except ZeroDivisionError:
-        print(f"Imposible to divise {int_try} by 0")
+        value = 8 / 0
+    except ZeroDivisionError as e:
+        print(f"Caught ZeroDivisionError: {e}")
+    print("\nTesting FileNotFoundError...")
     try:
-        file = open("nofile.txt")
-    except FileNotFoundError:
-        print(f"{file} not found")
+        value = open("nofile.txt")
+    except FileNotFoundError as e:
+        print(f"Caught FileNotFoundError: {e}")
     dictionnaire = {"nom": "Alice", "age": 30}
+    print("\nTesting KeyError...")
     try:
         print(dictionnaire["ville"])
-    except KeyError:
-        print("'Ville' is not in the dictionnary")
+    except KeyError as e:
+        print(f"Caught KeyError: {e}")
+    print("\nTesting multiple errors together...")
     try:
-        int_try = int("20")
-        print("Good Value")
-    except (ValueError, KeyError):
-        print("Invalid number or not in dictionnary")
-
-
-def test_error_types() -> None:
-    garden_operations()
-    print("The program continues running after each error")
-
-
-def main() -> None:
-    test_error_types()
+        value = int("ac")
+        print(dictionnaire["ville"])
+    except (ValueError, KeyError) as e:
+        print(f"Caught an error: {e}, but program continues!")
+    print("\nAll error types tested successfully!")
 
 
 if __name__ == "__main__":
-    main()
+    garden_operations()

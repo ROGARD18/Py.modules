@@ -10,7 +10,7 @@ class SecurePlant:
             height (int): Plant's height
             age (int): Plant's age
         """
-        self.name: str = name
+        self.__name: str = name
         self.__height: int = 0
         self.__age: int = 0
         if (height < 0 or age < 0):
@@ -40,6 +40,10 @@ class SecurePlant:
         else:
             self.__age = age
 
+    def get_name(self) -> str:
+        """Provide safe access to the private name attribute."""
+        return self.__name
+
     def get_height(self) -> int:
         """Provide safe access to the private height attribute."""
         return self.__height
@@ -58,7 +62,7 @@ def main() -> None:
     rose.__height = 10
     if (rose.get_height() > 0):
         print(
-            f"\nCurrent plant: {rose.name} ({rose.get_height()}cm, "
+            f"\nCurrent plant: {rose.get_name()} ({rose.get_height()}cm, "
             f"{rose.get_age()} days)"
         )
 

@@ -133,9 +133,10 @@ class GardenManager:
         Args:
             plant (Plant): plant that is add
         """
-        if GardenManager.check_height(plant.new_height):
+        check = GardenManager.check_height(plant.new_height)
+        if check:
             self.plants_list.append(plant)
-            print("---->>> Height validation test: True")
+            print(f"---->>> Height validation test: {check}")
             print(f"Added {plant.name} to {self.name}'s garden")
         else:
             print("---->>> Height validation test: False")
@@ -155,7 +156,7 @@ class GardenManager:
         print("")
 
     @classmethod
-    def get_gardens_number(cls) -> int:
+    def create_garden_network(cls) -> int:
         return (cls.garden_numbers)
 
     @classmethod
@@ -189,7 +190,7 @@ def main() -> None:
     print("")
     GardenManager.print_score()
     print("Total gardens managed:", end="")
-    print(f" {GardenManager.get_gardens_number()}")
+    print(f" {GardenManager.create_garden_network()}")
 
 
 if __name__ == "__main__":

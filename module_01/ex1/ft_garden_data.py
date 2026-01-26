@@ -18,11 +18,10 @@ class Plant:
         self.height: int = height
         self.age: int = age
 
-    def print_plant(self) -> None:
-        """
-        Fonction use to print plant's data.
-        """
-        print(f"{self.name}: {self.height}cm, {self.age} days old")
+    def __repr__(self) -> None:
+        """The special __repr__ method allows you to specify a character
+        string that serves as a representation of a class"""
+        return (f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 def main() -> None:
@@ -35,9 +34,9 @@ def main() -> None:
     cactus = Plant("Cactus", 15, 120)
 
     print("=== Garden Plant Registry ===")
-    rose.print_plant()
-    sunflower.print_plant()
-    cactus.print_plant()
+    print(rose)
+    print(sunflower)
+    print(cactus)
 
 
 if __name__ == "__main__":
