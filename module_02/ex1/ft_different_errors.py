@@ -1,4 +1,4 @@
-def garden_operations() -> None:
+def garden_operations(error: int) -> None:
     """Demonstration of multipes Error:
     - ValueError
     - ZeroDivisionError
@@ -6,36 +6,34 @@ def garden_operations() -> None:
     - KeyError
     - multiple Error in one
     """
-    print("\nTesting ValueError...")
-    try:
+    if (error == 1):
+        print("\nTesting ValueError...")
         value = int("abc")
         print(value)
-    except ValueError as e:
-        print(f"Caught ValueError: {e}")
-    print("\nTesting ZeroDivisionErro...")
-    try:
+    elif (error == 2):
+        print("\nTesting ZeroDivisionErro...")
         value = 8 / 0
-    except ZeroDivisionError as e:
-        print(f"Caught ZeroDivisionError: {e}")
-    print("\nTesting FileNotFoundError...")
-    try:
+    elif (error == 3):
+        print("\nTesting FileNotFoundError...")
         value = open("nofile.txt")
-    except FileNotFoundError as e:
-        print(f"Caught FileNotFoundError: {e}")
-    dictionnaire = {"nom": "Alice", "age": 30}
-    print("\nTesting KeyError...")
-    try:
+    elif (error == 4):
+        dictionnaire = {"nom": "Alice", "age": 30}
+        print("\nTesting KeyError...")
         print(dictionnaire["ville"])
-    except KeyError as e:
-        print(f"Caught KeyError: {e}")
-    print("\nTesting multiple errors together...")
-    try:
-        value = int("ac")
-        print(dictionnaire["ville"])
-    except (ValueError, KeyError) as e:
-        print(f"Caught an error: {e}, but program continues!")
+
+
+def test_error_types() -> None:
+    """Test garden_operations.
+    """
+    print("=== Garden Error Types Demo ===\n")
+    for i in range(5):
+        try:
+            garden_operations(i)
+        except (ValueError, ZeroDivisionError,
+                FileNotFoundError, KeyError) as e:
+            print(f"Caught {e.__class__.__name__} {e}")
     print("\nAll error types tested successfully!")
 
 
 if __name__ == "__main__":
-    garden_operations()
+    test_error_types()

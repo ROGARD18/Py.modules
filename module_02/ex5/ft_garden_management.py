@@ -1,16 +1,27 @@
 class GardenError(Exception):
+    """Base class for exceptions in this module."""
     pass
 
 
 class PlantError(GardenError):
+    """Exception raised for errors in plant attributes."""
     pass
 
 
 class WaterError(GardenError):
+    """Exception raised for errors in the watering process."""
     pass
 
 
 class Plant:
+    """
+    Represents a basic plant.
+
+    Attributes:
+        name (str): The name of the plant.
+        height (int): Height in centimeters.
+        age (int): Age in days.
+    """
     def __init__(self, name: str, height: int, age: int):
         self.name: str = name
         self.height: int = height
@@ -24,6 +35,9 @@ class Plant:
 
 
 class Vegetable(Plant):
+    """
+    A type of plant that requires sunlight.
+    """
     def __init__(
             self,
             name: str,
@@ -45,6 +59,9 @@ class Vegetable(Plant):
 
 
 class Waterplant(Vegetable):
+    """
+    A type of vegetable that lives in water.
+    """
     def __init__(
             self,
             name: str,
@@ -63,31 +80,38 @@ class Waterplant(Vegetable):
             _type_: all infos of the waterplant
         """
         return (super().__repr__()
-                + (f", sun: {str(self.sun)}")
                 + f", waterlevel: {(self.waterlevel)} ")
 
 
 class GardenManager:
+    """
+    Manages a collection of plants, including adding,
+    watering, and health checks.
+    """
     garden: list = []
 
     @staticmethod
     def plant_height(height) -> None:
+        """Validates that the plant height is positive."""
         if (height < 1):
             raise ValueError("Height not valide for the plant!")
 
     @staticmethod
     def plant_name(name: str) -> None:
+        """Validates that the plant has a name."""
         if name == "":
             raise ValueError("Name cannot be empty!")
 
     @staticmethod
     def plant_age(age: int) -> None:
+        """Validates that the plant age is between 0 and 10."""
         if age > 10:
             raise PlantError("Age impossble to attibute: too old")
         elif age < 0:
             raise PlantError("Age impossble to attibute: 0 or negative")
 
     def add_plants(self, plant: Plant):
+        """Attempts to validate and add a plant to the garden."""
         for i in range(3):
             try:
                 if (i == 0):
@@ -103,10 +127,12 @@ class GardenManager:
             print(f"Added {plant.name} successfully")
 
     def plant_watter(self, liters: int) -> None:
+        """Checks if there is enough water available."""
         if liters < 2:
             raise WaterError("Not enough water in the tank!")
 
     def water_plants(self, liters: int) -> None:
+        """Waters all plants in the garden if possible."""
         try:
             print("")
             self.plant_watter(liters)
@@ -121,16 +147,20 @@ class GardenManager:
             print("Closing watering system (cleanup)")
 
     def check_sun(self, plant) -> None:
+        """Checks if the sunlight level is within safe limits."""
         if (plant.sun > 10):
-            raise ValueError(f"{plant.name}'s sun: {plant.sun} is too hight (max 10)")
+            raise ValueError(f"{plant.name}'s sun: {plant.sun} \
+is too hight (max 10)")
 
     def check_water_level(self, plant) -> None:
+        """Checks if the water level is safe for Waterplants."""
         if (type(plant) is Waterplant):
             if (plant.waterlevel > 15):
                 raise ValueError(f"{plant.name}'s waterlevel: \
 {plant.waterlevel} is too much (max 15)")
 
     def plant_health(self) -> None:
+        """Checks and prints the health status of all plants."""
         print("\nChecking plant health...")
         for plant in self.garden:
             try:
@@ -142,6 +172,7 @@ class GardenManager:
 
 
 def init_plants_list(plants_list: list) -> list[Plant]:
+    """Converts a list of data into a list of Plant objects."""
     plants_list_final: list[Plant] = []
     for info in plants_list:
         if (len(info) == 3):
@@ -154,6 +185,7 @@ def init_plants_list(plants_list: list) -> list[Plant]:
 
 
 def main() -> None:
+    """Main execution function for the Garden Management System."""
     print("=== Garden Management System ===\n")
     plant_list: list[list] = [
         ["tomato", 4, 5, 1],
@@ -180,6 +212,7 @@ def main() -> None:
     Manager_bis.water_plants(1)
     print("System recovered and continuing...\n")
     print("Garden management system test complete!")
+
 
 if __name__ == "__main__":
     main()

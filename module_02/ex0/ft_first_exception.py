@@ -1,14 +1,14 @@
-def check_temperature(arg: str) -> None:
+def check_temperature(temp_str: str) -> None:
     """
     Fonction who try to convert a string in int and
     check if it succes if the int value is valid
 
-    Args:
-        arg (str): string that we are trying to convert
+    temp_strs:
+        temp_str (str): string that we are trying to convert
     """
-    print(f"Testing temperature: {arg}")
+    print(f"Testing temperature: {temp_str}")
     try:
-        int_temp = int(arg)
+        int_temp = int(temp_str)
         if int_temp <= 40 and int_temp >= 0:
             print(f"Temperature {int_temp}°C is perfect for plant!")
         elif int_temp > 40:
@@ -16,7 +16,7 @@ def check_temperature(arg: str) -> None:
         elif int_temp < 0:
             print(f"Error: {int_temp}°C is too cold for plants (min 0°C)")
     except Exception:
-        print(f"Error: '{arg}' is not a valid number")
+        print(f"Error: '{temp_str}' is not a valid number")
 
 
 def test_temperature_input() -> None:
