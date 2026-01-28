@@ -2,6 +2,9 @@ import sys
 
 
 def player_analytics() -> None:
+    """
+    Function demonstrate multiple operations on a list.
+    """
     n = len(sys.argv)
     print("== Player Score Analytics ===")
     if n == 1:

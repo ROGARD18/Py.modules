@@ -1,15 +1,28 @@
 def achievement_tracker() -> None:
     """Analyze player achievements using set operations
     like union and intersection."""
+
     print("=== Achievement Tracker System ===\n")
+
     alice_set: set = {
-        "first_kill", "level_10", "treasure_hunter", "speed_demon"
+        "first_kill",
+        "level_10",
+        "treasure_hunter",
+        "speed_demon"
     }
+
     bob_set: set = {
-        "first_kill", "level_10", "boss_slayer", "collector"
+        "first_kill",
+        "level_10",
+        "boss_slayer",
+        "collector"
     }
+
     charlie_set: set = {
-        "level_10", "treasure_hunter", "boss_slayer", "speed_demon",
+        "level_10",
+        "treasure_hunter",
+        "boss_slayer",
+        "speed_demon",
         "perfectionist"
     }
 
@@ -32,7 +45,7 @@ def achievement_tracker() -> None:
     all_rare = rare_alice.union(rare_bob, rare_charlie)
 
     print(f"Rare achievements (1 player): {all_rare}\n")
-          
+
     print(f"Alice vs Bob common: {alice_set.intersection(bob_set)}")
     print(f"Alice unique: {alice_set.difference(bob_set)}")
     print(f"Bob unique: {bob_set.difference(alice_set)}")
