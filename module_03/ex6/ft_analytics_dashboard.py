@@ -53,32 +53,59 @@ def analytics_dashboard() -> None:
                 'kill_monster',]
         }
     }
-    print("=== Dict and List Comprehension Examples ===")
-    hight_score: list = []
-    score_doubled: list = []
-    score_simple: list = []
-    active_player: list = []
-    player_user: list = []
-    all_list_of_achievements: list[list] = []
+    print("=== List Comprehension Examples ===")
+    players_list: list = [player for player, infos in players_dict.items()
+                          if infos.get("score") > 2000]
+    print("High scorers (>2000): ", players_list)
 
-    for user, infos in players_dict.items():
-        if (infos.get("score") > 2000):
-            hight_score.append(user)
-        if (infos.get("score") > 500):
-            active_player.append(user)
-        player_user.append(user)
-        score_simple.append(infos.get("score"))
-        all_list_of_achievements.append(infos.get("achievements"))
-        score_doubled.append(infos.get("score") * 2)
+    score_doubled: list = [(infos.get("score") * 2) for player, infos in
+                           players_dict.items()]
+    print("Scores doubled:", score_doubled)
 
-    print(f"High scores (>2000): {hight_score}")
-    print(f"Scores doubled: {score_doubled}")
-    print(f"Active players: {active_player}")
+    active_players: list = [player for player, infos in players_dict.items()
+                            if infos.get("score") > 500]
+    print("Active players:", active_players)
 
-    print("\n=== Set Comprehension Examples ===")
-    achievements_tot: set = {0}
-    achiev_mult: set = {0}
-    i: int = 0
+    print("\n=== Dict Comprehension Examples ===")
+    players_scores: dict = {player: infos.get("score") for player, infos
+                            in players_dict.items()}
+    print("Players scores: ", players_scores)
+
+    # i: int = 0
+    # score_categories: dict = {"hight": for player, infos in players_dict.items()
+    #                           if infos.get("score")}
+    
+    players_counts_achi: dict = {player: len(infos.get('achievements')) for
+                                 player, infos in players_dict.items()}
+    print("Achievements counts: ", players_counts_achi)
+
+    print("\n=== Set Comprehension Example ===")
+    print("Unique achievements: ", )
+    # hight_score: list = []
+    # score_doubled: list = []
+    # score_simple: list = []
+    # active_player: list = []
+    # player_user: list = []
+    # all_list_of_achievements: list[list] = []
+
+    # for user, infos in players_dict.items():
+    #     if (infos.get("score") > 2000):
+    #         hight_score.append(user)
+    #     if (infos.get("score") > 500):
+    #         active_player.append(user)
+    #     player_user.append(user)
+    #     score_simple.append(infos.get("score"))
+    #     all_list_of_achievements.append(infos.get("achievements"))
+    #     score_doubled.append(infos.get("score") * 2)
+
+    # print(f"High scores (>2000): {hight_score}")
+    # print(f"Scores doubled: {score_doubled}")
+    # print(f"Active players: {active_player}")
+
+    # print("\n=== Set Comprehension Examples ===")
+    # achievements_tot: set = {0}
+    # achiev_mult: set = {0}
+    # i: int = 0
 
     for user, infos in players_dict.items():
         achievements = set(infos["achievements"])
@@ -96,25 +123,17 @@ def analytics_dashboard() -> None:
             achiev_mult = achiev_mult.union(mult)
         i += 1
 
-    print(f"Unique achievements: {achievements_tot}")
-    print(f"Achievements obtained by all: {achiev_mult}")
+    # print(f"Unique achievements: {achievements_tot}")
+    # print(f"Achievements obtained by all: {achiev_mult}")
 
-    print("\n=== Combined Analysis ===")
-    achievements_flat: list = []
-    for element in all_list_of_achievements:
-        for item in element:
-            achievements_flat.append(item)
+    # print("\n=== Combined Analysis ===")
+    # achievements_flat: list = []
+    # for element in all_list_of_achievements:
+    #     for item in element:
+    #         achievements_flat.append(item)
 
-    player_number: int = len(players_dict.keys())
-    print(f"Total players: {player_number}")
-    print(f"Total unique achievements: {len(set(achievements_flat))}")
-    print(f"Average score: {sum(score_simple) / player_number}")
-    max: int = 0
-    for player, info in players_dict.items():
-        if (info.get("score") > max):
-            max = info.get("score")
-            player_result = player
-    print(f"Top player: {player_result} {max} score")
+    # player_number: int = len(players_dict.keys())
+    # print(f"Total players: {player_number}")2
 
 
 if __name__ == "__main__":
