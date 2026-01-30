@@ -1,5 +1,7 @@
 def analytics_dashboard() -> None:
-    """Desmontrate all knowledge of list, set and dictionary.
+    """
+    Desmontrate all knowledge of list's comprehension, set's comprehension
+    and dictionary's comprehension.
     """
     print("== Game Analytics Dashboard ===\n")
 
@@ -54,86 +56,45 @@ def analytics_dashboard() -> None:
         }
     }
     print("=== List Comprehension Examples ===")
+
     players_list: list = [player for player, infos in players_dict.items()
                           if infos.get("score") > 2000]
+
     print("High scorers (>2000): ", players_list)
 
     score_doubled: list = [(infos.get("score") * 2) for player, infos in
                            players_dict.items()]
+
     print("Scores doubled:", score_doubled)
 
     active_players: list = [player for player, infos in players_dict.items()
                             if infos.get("score") > 500]
+
     print("Active players:", active_players)
 
     print("\n=== Dict Comprehension Examples ===")
+
     players_scores: dict = {player: infos.get("score") for player, infos
                             in players_dict.items()}
+
     print("Players scores: ", players_scores)
 
-    # i: int = 0
-    # score_categories: dict = {"hight": for player, infos in players_dict.items()
-    #                           if infos.get("score")}
-    
     players_counts_achi: dict = {player: len(infos.get('achievements')) for
                                  player, infos in players_dict.items()}
+
     print("Achievements counts: ", players_counts_achi)
 
-    print("\n=== Set Comprehension Example ===")
-    print("Unique achievements: ", )
-    # hight_score: list = []
-    # score_doubled: list = []
-    # score_simple: list = []
-    # active_player: list = []
-    # player_user: list = []
-    # all_list_of_achievements: list[list] = []
-
-    # for user, infos in players_dict.items():
-    #     if (infos.get("score") > 2000):
-    #         hight_score.append(user)
-    #     if (infos.get("score") > 500):
-    #         active_player.append(user)
-    #     player_user.append(user)
-    #     score_simple.append(infos.get("score"))
-    #     all_list_of_achievements.append(infos.get("achievements"))
-    #     score_doubled.append(infos.get("score") * 2)
-
-    # print(f"High scores (>2000): {hight_score}")
-    # print(f"Scores doubled: {score_doubled}")
-    # print(f"Active players: {active_player}")
-
-    # print("\n=== Set Comprehension Examples ===")
-    # achievements_tot: set = {0}
-    # achiev_mult: set = {0}
-    # i: int = 0
-
-    for user, infos in players_dict.items():
-        achievements = set(infos["achievements"])
-        mult = set(infos["achievements"])
-        for subuser, subinfos in players_dict.items():
-            if user == subuser:
-                continue
-            achievements = achievements.difference(subinfos["achievements"])
-            mult = mult.intersection(subinfos["achievements"])
-        if (i == 0):
-            achievements_tot = achievements
-            achiev_mult = mult
-        else:
-            achievements_tot = achievements_tot.union(achievements)
-            achiev_mult = achiev_mult.union(mult)
-        i += 1
-
-    # print(f"Unique achievements: {achievements_tot}")
-    # print(f"Achievements obtained by all: {achiev_mult}")
-
-    # print("\n=== Combined Analysis ===")
-    # achievements_flat: list = []
-    # for element in all_list_of_achievements:
-    #     for item in element:
-    #         achievements_flat.append(item)
-
-    # player_number: int = len(players_dict.keys())
-    # print(f"Total players: {player_number}")2
+    print("\n=== Set Comprehension Examples ===")
+    players_demo: list = ["alice", "alice", "bob", "charlie", "bob", "bob"]
+    unique_achievements: set = {
+        achievements for user, infos in players_dict.items()
+        for achievements in infos.get("achievements")
+        if all(achievements not in infos_bis.get("achievements") for user_bis,
+               infos_bis in players_dict.items() if user != user_bis)
+    }
+    players_unique: set = {player for player in players_demo}
+    print("Unique players:", players_unique)
+    print("Unique achievements: ", unique_achievements)
 
 
 if __name__ == "__main__":
