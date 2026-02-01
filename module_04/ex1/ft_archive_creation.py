@@ -6,7 +6,7 @@ def write_in_new_file() -> None:
 
     file_name: str = "new_discovery.txt"
 
-    print("Initializing new storage unit: mew_discovery.txt", file_name)
+    print("Initializing new storage unit:", file_name)
     print("Storage unit created successfuly...\n")
 
     file = open(file_name, "w")
@@ -21,12 +21,6 @@ def write_in_new_file() -> None:
     file.close()
     print("Data inscription complete. Storage unit sealed.")
     print(f"Archive '{file_name} ready for long-term preservation.")
-    # with open("file_name", "a") as f:
-    #     f.write("Now the file has more content!")
-
-    # # open and read the file after the appending:
-    # with open("file_name") as f:
-    #     print(f.read())
 
 
 if __name__ == "__main__":

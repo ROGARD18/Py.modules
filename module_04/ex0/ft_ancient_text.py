@@ -6,7 +6,7 @@ def read_ancient_fragement_file() -> None:
 
     print("Accessing Storage Vault: ", {file_name})
     try:
-        file: int = open(file_name, "r")
+        file = open(file_name, "r")
         print("Connection established...\n")
     except Exception:
         print("ERROR: Storage vault not found")
