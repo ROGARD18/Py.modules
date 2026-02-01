@@ -1,5 +1,6 @@
 def crisis_response() -> None:
     """
+    Check and demonstate all crisis cases with open.
     """
     print("=== CYBER ARCHIVES - CRISIS RESPONSE SYSTEM ===\n")
     try:

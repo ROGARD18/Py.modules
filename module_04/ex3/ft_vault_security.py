@@ -1,4 +1,7 @@
 def security_file() -> None:
+    """
+    Function use to demonstrate with knowledge.
+    """
     print("CYBER ARCHIVES - VAULT SECURITY ===\n")
 
     print("Initiating secure vault access...")

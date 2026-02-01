@@ -2,14 +2,23 @@ import sys
 
 
 def print_to_stdout(string: str) -> None:
+    """
+    Use to print on channel stdout.
+    """
     print(f"[STANDARD] {string}", file=sys.stdout)
 
 
 def print_to_stderr(string: str) -> None:
+    """
+    Use to print on channel stderr.
+    """
     print(f"[ALERT] {string}", file=sys.stderr)
 
 
 def ft_stream_management() -> None:
+    """
+    Print messages on different chanel.
+    """
     print("=== CYBER ARCHIVES - COMMUNICATION SYSTEM ===\n")
 
     user_id = input("Input Stream active. Enter archivist ID: ")
