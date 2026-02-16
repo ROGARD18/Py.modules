@@ -1,15 +1,37 @@
-import pandas
-# import request as rq
-# import numpy as np
-# import matplotlib as mpl
-# import sys
-# import importlib as ipl
+import importlib
 
 
 def loading() -> None:
-    df = pandas.read_csv('data.csv')
+    print("\nLOADING STATUS: Loading programs...\n")
 
-    print(df.to_string())
+    try:
+        pd = importlib.import_module("pandas")
+        rq = importlib.import_module("requests")
+        np = importlib.import_module("numpy")
+        import matplotlib as mpl
+        from matplotlib import pyplot as plt
+    except Exception as e:
+        print(e)
+        return
+    print(f"[OK] {pd.__name__} ({pd.__version__}) - Data manipulation ready")
+    print(f"[OK] {rq.__name__} ({rq.__version__}) - Network access ready")
+    print(f"[OK] {mpl.__name__} ({mpl.__version__}) - Vizualisation ready")
+
+    print("Analizing Matrix data...")
+
+    array_x = np.array([x for x in range(0, 1000)])
+    array_y = np.array([y for y in range(0, 1000)])
+    print("Processing 1000 data...")
+
+    x = pd.Series(array_x)
+    y = pd.Series(array_y)
+
+    plt.plot(x, y)
+    plt.savefig("analysis.png")
+    print("Generating visualization...")
+
+    print("\nAnalysis complete!")
+    print("Results saved to: matrix\\_analysis.png}")
 
 
 if __name__ == "__main__":
