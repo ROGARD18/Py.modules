@@ -10,7 +10,7 @@ def main() -> None:
             'Fire Dragon': 8,
             'Goblin Warrior': 4
         },
-        'effect': 'Creature summoned to battlefield'
+        'creature_effect': 'Creature summoned to battlefield'
     }
 
     print("\n===DataDeck Card Foundation ===\n")

@@ -16,7 +16,7 @@ class CreatureCard(Card):
             return {
                 'card_played': self.name,
                 'mana_used': self.attack - 2,
-                'effect': {game_state.get('effect')}
+                'creature_effect': {game_state.get('effect')}
             }
 
     def attack_target(self, target: 'CreatureCard') -> dict:
