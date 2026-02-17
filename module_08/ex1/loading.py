@@ -2,8 +2,6 @@ import importlib
 
 
 def loading() -> None:
-    print("\nLOADING STATUS: Loading programs...\n")
-
     try:
         pd = importlib.import_module("pandas")
         rq = importlib.import_module("requests")
@@ -12,16 +10,23 @@ def loading() -> None:
         from matplotlib import pyplot as plt
     except Exception as e:
         print(e)
+        print("\nTry: pip install -r requirements.txt")
+        print("python3 loading.py\nOr ")
+        print("try: poetry install")
+        print("python3 loading.py")
         return
+    print("\nLOADING STATUS: Loading programs...\n")
+
+    print("Checking dependencies:")
     print(f"[OK] {pd.__name__} ({pd.__version__}) - Data manipulation ready")
     print(f"[OK] {rq.__name__} ({rq.__version__}) - Network access ready")
     print(f"[OK] {mpl.__name__} ({mpl.__version__}) - Vizualisation ready")
 
-    print("Analizing Matrix data...")
+    print("\nAnalizing Matrix data...")
 
     array_x = np.array([x for x in range(0, 1000)])
     array_y = np.array([y for y in range(0, 1000)])
-    print("Processing 1000 data...")
+    print("Processing 1000 data points...")
 
     x = pd.Series(array_x)
     y = pd.Series(array_y)

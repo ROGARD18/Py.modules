@@ -1,0 +1,10 @@
+[project]
+name = "loading"
+version = "1.0.0"
+description = "data analysis program"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.3.3",
+    "matplotlib>=3.10.0",
+    "requests>=2.3.0"   
+]
