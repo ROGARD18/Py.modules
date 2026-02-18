@@ -1,9 +1,9 @@
-from typing import Any, List, Dict, Union, Optional
+from typing import Any
 from abc import ABC, abstractmethod
 
 
 class DataProcessor(ABC):
-    def __init__(self, data: Any):
+    def __init__(self, data: Any) -> None:
         pass
 
     @abstractmethod
@@ -23,9 +23,10 @@ class NumericProcessor(DataProcessor):
         if not self.validate(data):
             return self.format_output("ERROR: Invalid Data Format")
 
-        s = sum(data)
-        a = s / len(data)
-        result_str = f"Processed {len(data)} numeric values, sum={s}, avg={a}"
+        s: int = sum(data)
+        a: float = s / len(data)
+        result_str: str = (f"Processed {len(data)} numeric values,"
+                           f"sum={s}, avg={a}")
         return self.format_output(result_str)
 
     def validate(self, data: Any) -> bool:
