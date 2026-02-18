@@ -3,25 +3,35 @@ from abc import ABC, abstractmethod
 
 
 class StreamDataError(Exception):
+    """Exception raised when data format in a stream is invalid."""
     pass
 
 
 class StreamExistsError(Exception):
+    """Exception raised when attempting to add a stream with a duplicate ID."""
     pass
 
 
 class DataStream(ABC):
+    """
+    Abstract base class for all data streams in the Nexus system.
+    Provides core functionality for filtering and statistical reporting.
+    """
     def __init__(self, stream_id: str):
+        """Initialize the stream with a unique identifier and tracking
+        metrics."""
         self.stream_id: str = stream_id
         self.processed: float = 0
         self.type: str
 
     @abstractmethod
     def process_batch(self, data_batch: List[Any]) -> str:
+        """Process a batch of data and return a summary string."""
         pass
 
     def filter_data(self, data_batch: List[Any],
                     criteria: Optional[str] = None) -> List[Any]:
+        """Filter the data batch based on a simple string matching criteria."""
         if criteria is None:
             return data_batch
 
@@ -32,6 +42,7 @@ class DataStream(ABC):
         return list_result
 
     def get_stats(self) -> Dict[str, Union[str, int, float]]:
+        """Return a dictionary containing basic stream performance metrics."""
         return {
             "STREAM_ID": self.stream_id,
             "TYPE": self.type,
@@ -40,12 +51,16 @@ class DataStream(ABC):
 
 
 class SensorStream(DataStream):
+    """Stream processor for environmental sensor data (temperature,
+    humidity)."""
     def __init__(self, stream_id: str):
+        """Initialize sensor stream and average temperature tracker."""
         super().__init__(stream_id=stream_id)
         self.type: str = "Environmental Data"
         self.avg_temp: float = 0
 
     def process_batch(self, data_batch: List[Any]) -> str:
+        """Parse temperature readings and update the moving average."""
         temp: float = 0
         nb_temp: int = 0
         for elem in data_batch:
@@ -65,6 +80,8 @@ class SensorStream(DataStream):
 
     def filter_data(self, data_batch: List[Any],
                     criteria: Optional[str] = None) -> List[Any]:
+        """Filter sensor data for critical thresholds (temp > 40 or
+        humidity > 90)."""
         if criteria is None:
             return data_batch
         if criteria != "critical":
@@ -85,18 +102,22 @@ class SensorStream(DataStream):
         return filtered
 
     def get_stats(self) -> Dict[str, Union[str, int, float]]:
+        """Return stream stats including the current average temperature."""
         stats: Dict[str, str | int | float] = super().get_stats()
         stats.update({"AVG_TEMP": self.avg_temp})
         return stats
 
 
 class TransactionStream(DataStream):
+    """Stream processor for financial transaction data (buy/sell)."""
     def __init__(self, stream_id: str) -> None:
+        """Initialize transaction stream and net flow tracker."""
         super().__init__(stream_id)
         self.type = "Financial Data"
         self.net_flow: int = 0
 
     def process_batch(self, data_batch: List[Any]) -> str:
+        """Calculate the net flow based on buys and sells in the batch."""
         buys: int = 0
         sells: int = 0
         for elem in data_batch:
@@ -119,6 +140,7 @@ class TransactionStream(DataStream):
 
     def filter_data(self, data_batch: List[Any],
                     criteria: Optional[str] = None) -> List[Any]:
+        """Filter transactions based on priority thresholds."""
         if criteria is None:
             return data_batch
         if criteria != "high-priority":
@@ -140,18 +162,22 @@ class TransactionStream(DataStream):
         return filtered
 
     def get_stats(self) -> Dict[str, Union[str, int, float]]:
+        """Return stream stats including the current net financial flow."""
         stats: Dict[str, str | int | float] = super().get_stats()
         stats.update({"NET_FLOW": self.net_flow})
         return stats
 
 
 class EventStream(DataStream):
+    """Stream processor for system-level events and error logging."""
     def __init__(self, stream_id: str) -> None:
+        """Initialize event stream and error counter."""
         super().__init__(stream_id)
         self.type = "System Events"
         self.errors: int = 0
 
     def process_batch(self, data_batch: List[Any]) -> str:
+        """Identify error strings in the batch and update error counts."""
         for elem in data_batch:
             if not isinstance(elem, str):
                 raise StreamDataError(f"{elem} is not of type str")
@@ -166,6 +192,7 @@ class EventStream(DataStream):
 
     def filter_data(self, data_batch: List[Any],
                     criteria: Optional[str] = None) -> List[Any]:
+        """Extract only critical error events from the batch."""
         if criteria is None:
             return data_batch
         if criteria != "critical":
@@ -181,16 +208,22 @@ class EventStream(DataStream):
         return filtered
 
     def get_stats(self) -> Dict[str, Union[str, int, float]]:
+        """Return stream stats including the total number of errors
+        detected."""
         stats: Dict[str, str | int | float] = super().get_stats()
         stats.update({"ERRORS": self.errors})
         return stats
 
 
 class StreamProcessor():
+    """Manager class to handle multiple data streams through a
+    unified interface."""
     def __init__(self) -> None:
+        """Initialize the processor with an empty registry of streams."""
         self.streams: List[DataStream] = []
 
     def add_stream(self, new_stream: DataStream) -> None:
+        """Add a new stream to the registry, ensuring ID uniqueness."""
         for stream in self.streams:
             if stream.stream_id == new_stream.stream_id:
                 raise StreamExistsError(f"stream_id '{new_stream.stream_id}'"
@@ -199,6 +232,8 @@ class StreamProcessor():
 
 
 def main() -> None:
+    """Diagnostic routine for testing polymorphic stream
+    processing and filtering."""
     print("=== CODE NEXUS - POLYMORPHIC STREAM SYSTEM ===")
 
     print("\nInitializing Sensor Stream...")
