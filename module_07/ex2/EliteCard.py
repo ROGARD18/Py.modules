@@ -11,31 +11,69 @@ class EliteCard(Card, Combatable, Magical):
         self.combat_type = combat_type
         self.life: int = 10
         self.alive: bool = True
+        self.mana: int = 7
+
+    def get_alive(self) -> bool:
+        if self.life < 1:
+            self.alive = False
+            return False
+        return self.alive
 
     def play(self, game_state: dict) -> dict:
         print("\nCombat phase:")
-        print("Attack result:", self.attack(game_state.get('Ennemy')))
-        print("Defense result:", self.defend(game_state.get('Ennemy')))
+        Enemy: EliteCard = game_state.get('Enemy')
+        print("Attack result:", self.attack(Enemy))
+        print("Defense result:", self.defend(Enemy.damage))
 
-        print("\nDefense phase:")
+        print("\nMagic Phase:")
         print("Spell cast:", self.cast_spell(game_state.get('spell'),
                                              game_state.get('targets')))
         print("Mana channel:", self.channel_mana(game_state.get('amount')))
 
-    def attack(self, target) -> dict:
-        pass
+    def attack(self, target: 'EliteCard') -> dict:
+        return {
+            'attacker': self.name,
+            'target': target.name,
+            'damage': self.damage,
+            'combat_type': self.combat_type
+        }
 
     def defend(self, incoming_damage: int) -> dict:
-        pass
+        return {
+            'defender': self.name,
+            'damage_taken': incoming_damage,
+            'domage_blocked': incoming_damage + 1,
+            'still_alive': self.get_alive()
+        }
 
     def get_combat_stats(self) -> dict:
-        pass
+        return {
+            'attacker': self.name,
+            'damage': self.damage,
+            'combat_type': self.combat_type
+        }
 
-    def cast_spell(self, spell_name: str, targets: list) -> dict:
-        pass
+    def cast_spell(self, spell_name: str, targets: list['EliteCard']) -> dict:
+        targets_name: list = []
+        for target in targets:
+            targets_name.append(target.name)
+        return {
+            'caster': self.name,
+            'spell': spell_name,
+            'targets': targets_name,
+            'mana_used': self.damage - 1
+        }
 
     def channel_mana(self, amount: int) -> dict:
-        pass
-    
+        return {
+            'channeled': self.mana - self.damage + 1,
+            'total_mana': self.mana
+        }
+
     def get_magic_stats(self) -> dict:
-        pass
+        return {
+            'caster': self.name,
+            'mana_used': self.damage - 1,
+            'channeled': self.mana - self.damage + 1,
+            'total_mana': self.mana
+        }

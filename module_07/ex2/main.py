@@ -12,22 +12,29 @@ def main() -> None:
                     method.startswith("__")]
     magical_methods = [method for method in dir(Magical) if callable(
                     getattr(Magical, method)) and not method.startswith("__")]
-    
-    game_state: dict = {
-        
-    }
 
+    arcane_warrior: EliteCard = EliteCard("Arcane Warrior", 5, "Legendary",
+                                          5, "melee")
+    enemy: EliteCard = EliteCard("Enemy", 3, "Epic", 2, "melee")
+    enemy1: EliteCard = EliteCard("Enemy1", 2, "Rare", 2, "distance")
+    enemy2: EliteCard = EliteCard("Enemy2", 2, "Rare", 2, "distance")
+
+    game_state: dict = {
+        'Enemy': enemy,
+        'spell': 'Fireball',
+        'targets': [enemy1, enemy2]
+    }
     print("\n=== DataDeck Ability System ===\n")
 
-    print(card_methods)
     print("EliteCard capabilities:")
     print(f"- Card: {card_methods}")
     print(f"- Combatable: {combatable_methods}")
     print(f"- Magical: {magical_methods}")
 
-    arcane_warrior: EliteCard = EliteCard("arcane_warrior", 5, "Legendary", 5, "melee")
-    print("\nPlaying Arcane Warrior (Elite Card):\n")
+    print("\nPlaying Arcane Warrior (Elite Card):")
     arcane_warrior.play(game_state)
+
+    print("\nMultiple interface implementation successful!")
 
 
 if __name__ == "__main__":
