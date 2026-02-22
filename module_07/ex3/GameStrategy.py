@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class GameStrategy(ABC):
     def __init__(self) -> None:
-        pass
+        self.strategy: str = "default"
 
     @abstractmethod
     def execute_turn(self, hand: list, battlefield: list) -> dict:

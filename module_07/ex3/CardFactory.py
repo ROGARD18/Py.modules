@@ -3,9 +3,6 @@ from ex0.Card import Card
 
 
 class CardFactory(ABC):
-    def __init__(self) -> None:
-        pass
-
     @abstractmethod
     def create_creature(self, name_or_power: str | int | None = None) -> Card:
         pass
