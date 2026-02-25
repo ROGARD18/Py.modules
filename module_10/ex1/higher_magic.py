@@ -1,60 +1,63 @@
-from typing import Callable
+def fireball(target: str) -> str:
+    return (f"fireball hits {target}")
 
 
-def spell_hit(target: str) -> str:
-    return f"hits {target}"
+def heal(target: str) -> str:
+    return (f"{target} healed")
 
 
-def spell_heal(target: str) -> str:
-    return f"Heals {target}"
-
-
-def damage_calculator(power: int) -> int:
-    return power
-
-
-def is_dragon(target: str) -> bool:
-    return target == "Dragon"
-
-
-def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
+def spell_combiner(spell1: callable, spell2: callable) -> callable:
     return (
-        lambda *args, **kwag: (spell1(*args, **kwag), spell2(*args, **kwag))
+        lambda *args, **kwargs:
+        (spell1(*args, **kwargs), spell2(*args, **kwargs))
+        )
+
+
+def base_spell(base_level: int) -> int:
+    return (base_level)
+
+
+def power_amplifier(base_spell: callable, multiplier: int) -> callable:
+    return (lambda *args, **kwargs: base_spell(*args, **kwargs) * multiplier)
+
+
+def ft_condition(target: str) -> bool:
+    return (True if target == 'dragon' else False)
+
+
+def conditional_caster(condition: callable, spell: callable) -> callable:
+    return (
+        lambda *args, **kwargs: spell(*args, **kwargs)
+        if condition(*args, **kwargs) else
+        "Spell fizzled"
+        )
+
+
+def spell_sequence(spells: list[callable]) -> callable:
+    return (
+        lambda *args, **kwargs: [spell(*args, **kwargs) for spell in spells]
     )
 
 
-def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
-    return lambda *args, **kwargs: base_spell(*args, **kwargs) * multiplier
-
-
-def conditional_caster(condition: Callable, spell: Callable) -> Callable:
-    def wrapper(*args, **kwargs):
-        if condition(*args, **kwargs):
-            return spell(*args, **kwargs)
-        return "Spell fizzled"
-    return wrapper
-
-
-def spell_sequence(spells: list[Callable]) -> Callable:
-    return lambda *args, **kwargs: [s(*args, **kwargs) for s in spells]
-
-
 def main() -> None:
-    print("--- Test du Higher Realm ---")
+    print("\nTesting spell combiner...")
+    sc = spell_combiner(fireball, heal)
+    print(sc('dragon'))
 
-    combined = spell_combiner(spell_hit, spell_heal)
-    print(f"Combiner (Dragon): {combined('dragon')}")
+    print("\nTesting power amplifier...")
+    pa = power_amplifier(base_spell, 3)
+    print(pa(5))
 
-    mega_damage = power_amplifier(damage_calculator, 3)
-    print(f"Amplifier (Base 10, x3): {mega_damage(10)}")
+    print("\nTesting conditional caster...")
+    ca = conditional_caster(ft_condition, fireball)
+    print(ca('dragon'))
+    print(ca(''))
 
-    dragon_only_spell = conditional_caster(is_dragon, spell_hit)
-    print(f"Conditional (Dragon): {dragon_only_spell('Dragon')}")
-    print(f"Conditional (Goblin): {dragon_only_spell('Goblin')}")
-
-    sequence = spell_sequence([spell_hit, spell_heal])
-    print(f"Sequence (Knight): {sequence('Knight')}")
+    print("\nTesting spell sequence...")
+    spell_list: list[callable] = [fireball, heal]
+    sq = spell_sequence(spell_list)
+    print(sq('dragon'))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
