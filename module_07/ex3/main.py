@@ -9,17 +9,17 @@ def main() -> None:
 
     print("Configuring Fantasy Card Game...")
     game_engine: GameEngine = GameEngine()
-    game_engine.configure_engine(FantasyCardFactory, AggressiveStrategy)
+    game_engine.configure_engine(FantasyCardFactory(), AggressiveStrategy())
 
     print(f"Available types: {game_engine.factory.get_supported_types()}")
 
     print("\nSimulating aggressive turn...")
-    deck: dict
     try:
-        deck = game_engine.factory.create_themed_deck(3)
+        deck: dict = game_engine.factory.create_themed_deck(3)
     except Exception as e:
         print(f"Error while creating theme deck: {e}")
         exit(1)
+
     print("Hand: [", end="")
     first: bool = True
     for _, card in deck.items():
@@ -28,13 +28,13 @@ def main() -> None:
         else:
             print(", ", end="")
         print(f"{card.name} ({card.cost})", end="")
-        game_engine.hand.append(card)
+        game_engine.add_to_hand(card)       # FIX: méthode encapsulée
     print("]")
 
-    game_engine.battlefield = [
+    game_engine.add_to_battlefield(
         CreatureCard("Enemy Player", 5, "Common", 5, 10)
-    ]
-    game_engine.cards_created += 1
+    )
+
     print("\nTurn execution:")
     turn: dict = game_engine.simulate_turn()
     print(f"Actions: {turn}")

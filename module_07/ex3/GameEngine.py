@@ -9,12 +9,11 @@ class GameEngine:
         self.cards_created: int = 0
         self.__battlefield: list = []
         self.__hand: list = []
-        self.__factory: CardFactory | None
-        self.__strategy: GameStrategy | None
+        self.__factory: CardFactory | None = None
+        self.__strategy: GameStrategy | None = None
 
     def configure_engine(self, factory: CardFactory,
                          strategy: GameStrategy) -> None:
-
         self.__factory = factory
         print(f"Factory: {type(self.__factory).__name__}")
         self.__strategy = strategy
@@ -23,11 +22,9 @@ class GameEngine:
     @property
     def factory(self) -> CardFactory:
         if self.__factory is None:
-            raise RuntimeError("Engine not configured. Call configure_engine()"
-                               " first.")
+            raise RuntimeError(...)
         return self.__factory
 
-    @property
     def strategy(self) -> GameStrategy:
         if self.__strategy is None:
             raise RuntimeError("Engine not configured. Call configure_engine()"
@@ -48,16 +45,13 @@ class GameEngine:
         self.__hand.append(card)
 
     def simulate_turn(self) -> dict:
-        if self.__strategy is None or self.__factory is None:
+        if self.__factory is None or self.__strategy is None:
             raise RuntimeError("Engine not configured. Call configure_engine()"
                                " first.")
-
         self.turns += 1
         print(f"Strategy: {self.__strategy.get_strategy_name()}")
-
         if not self.__hand:
             self.draw_hand()
-
         turn_result: dict = self.__strategy.execute_turn(
             self.__hand, self.__battlefield
         )
