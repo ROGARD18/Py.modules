@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 
 
 def error_handling(data: str) -> None:
@@ -7,6 +6,17 @@ def error_handling(data: str) -> None:
 
 
 def oracle() -> None:
+    """
+    Accesses the mainframe configuration by loading and 
+    validating environment variables.
+    """
+    try:
+        from dotenv import load_dotenv
+    except ImportError:
+        print("Try: pip install dotenv")
+        return
+    # Load variables from .env file into os.environ and
+    # This allows development settings to be stored locally
     load_dotenv()
     MATRIX_MODE = os.getenv('MATRIX_MODE')
     if MATRIX_MODE is None:

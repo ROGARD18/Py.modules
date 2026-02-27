@@ -4,10 +4,15 @@ import sys
 
 
 def ft_construct() -> None:
+    """
+    Detects the current Python environment and provides instructions
+    to enter the virtual 'construct'.
+    """
+    # VIRTUAL_ENV is an environment variable set by the activation script of a venv
     if 'VIRTUAL_ENV' not in os.environ:
         print("\nMATRIX STATUS: You're still plugged in\n")
 
-        print("Current Python:", sys.path[2])
+        print("Current Python:", sys.executable)
         print("Virtual Environment: None detected")
 
         print("\nWARNING: You're in the global environment!")
@@ -32,6 +37,7 @@ def ft_construct() -> None:
         print("Safe to install packages without affecting\nthe global system")
 
         print("\nPackage installation path:")
+        # site.getsitepackages() returns the location where modules are installed
         print(site.getsitepackages()[0])
 
 
