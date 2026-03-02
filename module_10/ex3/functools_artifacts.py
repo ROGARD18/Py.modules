@@ -54,19 +54,19 @@ def spell_dispatcher() -> callable:
 
 
 @spell_dispatcher.register(int)
-def _1(x: int) -> str:
-    return (f"Spell hits {x} damage")
+def _1(damage_spell: int) -> str:
+    return (f"Spell hits {damage_spell} damage")
 
 
 @spell_dispatcher.register(str)
-def _2(x: str) -> str:
-    return (f"The spell is a {x}'s enchantment")
+def _2(enchantment: str) -> str:
+    return (f"The spell is a {enchantment}'s enchantment")
 
 
 @spell_dispatcher.register(list)
-def _3(x: list) -> str:
+def _3(multi_cast: list) -> str:
     spell_list: list = []
-    for spell in x:
+    for spell in multi_cast:
         spell_list.append(spell)
     return (f"List of spells is {spell_list}")
 
